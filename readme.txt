@@ -28,11 +28,14 @@ To be clear, this plugin does absolutely nothing to the front-end of your site. 
 
 Add Post Type Instructions works with multisite networks and allows users to define settings on a per-site basis.
 
-** Coming soon **
+= Coming soon =
 * Ability to choose minimum user role for settings pages
 * Support for Categories and Tags metaboxes (per post type)
 * Help tab on settings page about unsupport features and how to support them
-* Translate to German, Spanish
+* Translations
+
+= Suggestions are welcome =
+* email the author at dave@dauid.us
 
 == Installation ==
 
