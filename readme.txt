@@ -4,7 +4,7 @@ Author URI: http://dauid.us
 Tags: instructions, instruction, assist, direct, direction, directions, assistive, post type, help, metabox, insert text, wysiwyg, content, features, format, attributes, author, trackbacks, excerpt
 Requires at least: 3.1
 Tested up to: 4.0.1
-Stable tag: 1.0.3.1
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 
 == Changelog ==
 
+= 1.0.3.1 =
+* fixed a bug where all posts and custom post types would display categories and tags on settings page
+
 = 1.0.3 =
 * restrict settings page to users with manage_options capability
 * add support for categories and tags
@@ -101,6 +104,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 * initial development release
 
 == Upgrade Notice ==
+
+= 1.0.3.1 =
+bugfix
 
 = 1.0.3 =
 Update to add support for categories and tags metaboxes.
