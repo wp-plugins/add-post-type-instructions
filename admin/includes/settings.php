@@ -63,8 +63,6 @@ class add_post_type_instructions_Settings {
 				// 'revisions' => '',
 				'page-attributes' => '',
 				'post-formats' => '',
-				'categories' => '',
-				'tags' => '',
 			);
 
 		foreach ( $post_types as $pt ) {
@@ -190,8 +188,8 @@ class add_post_type_instructions_Settings {
 						$args
 					);
 				}
-
-				if ( taxonomy_exists( $pt, 'category' )) {
+/*
+				if ( taxonomy_exists( 'category' )) {
 					add_settings_field(
 						'categories',
 						__( '<br />Categories Metabox:', $this->plugin_slug ),
@@ -202,7 +200,7 @@ class add_post_type_instructions_Settings {
 					);
 				}
 
-				if ( taxonomy_exists( $pt, 'post_tag' )) {
+				if ( taxonomy_exists( 'post_tag' )) {
 					add_settings_field(
 						'tags',
 						__( '<br />Tags Metabox:', $this->plugin_slug ),
@@ -212,7 +210,8 @@ class add_post_type_instructions_Settings {
 						$args
 					);
 				}
-
+*/
+				
 			}
 
 			register_setting(
