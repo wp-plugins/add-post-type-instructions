@@ -80,9 +80,11 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 
 == Changelog ==
 
+= 1.0.3.1 =
+* bugfixes
+
 = 1.0.3 =
 * restrict settings page to users with manage_options capability
-* add support for categories and tags
 
 = 1.0.2 =
 * initial public release
