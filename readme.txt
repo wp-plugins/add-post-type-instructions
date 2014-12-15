@@ -33,6 +33,8 @@ Add Post Type Instructions works with multisite networks and allows users to def
 * Help tab on settings page about unsupport features and how to support them
 * Translations
 
+This plugin will not work with Visual Composer or other drag-n-drop page builders.  I am looking into this for a future release.
+
 = Suggestions are welcome =
 * email the author at dave@dauid.us
 
