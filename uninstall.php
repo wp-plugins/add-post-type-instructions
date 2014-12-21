@@ -24,7 +24,34 @@ foreach ( $post_types as $pt ) {
 	delete_option( $plugin->get_plugin_slug() . '_' . $pt );
 }
 
-delete_option( 'apti-display-activation-message' );
-/**
- * @todo Delete options in whole network
- */
+	/**
+	 * Change tags metabox content
+	 *
+	 * @param  string $content HTML string
+	 *
+	 * @since 2.0
+	 */
+	delete_option( 'apti-display-uninstallation-message' );
+
+	if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+
+		if ( $network_wide ) {
+
+			// Get all blog ids
+			$blog_ids = self::get_blog_ids();
+
+			foreach ( $blog_ids as $blog_id ) {
+
+				delete_option( $plugin->get_plugin_slug() . '_' . $pt );
+
+			}
+
+			restore_current_blog();
+
+		} else {
+			delete_option( $plugin->get_plugin_slug() . '_' . $pt );
+		}
+
+	} else {
+		delete_option( $plugin->get_plugin_slug() . '_' . $pt );
+	}

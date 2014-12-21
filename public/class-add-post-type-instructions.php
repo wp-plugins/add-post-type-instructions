@@ -20,7 +20,7 @@ class add_post_type_instructions {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0';
+	const VERSION = '1.1';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -242,6 +242,17 @@ class add_post_type_instructions {
 	}
 
 	/**
+	 * Fired for each blog when the plugin is deactivated.
+	 *
+	 * @since    1.0.1
+	 */
+	private static function single_uninstall() {
+
+		delete_option( 'apti-display-uninstallation-message' );
+
+	}
+
+	/**
 	 * Display notice message when activating the plugin.
 	 *
 	 * @since 1.0.1
@@ -267,16 +278,41 @@ class add_post_type_instructions {
 	}
 
 	/**
+	 * Display notice message when activating the plugin.
+	 *
+	 * @since 1.0.1
+	 */
+	public function admin_notice_uninstallation() {
+
+		$screen = get_current_screen();
+
+		if ( true == get_option( 'apti-display-uninstallation-message' ) && 'plugins' == $screen->id ) {
+			$plugin = self::get_instance();
+
+			$html  = '<div class="updated">';
+			$html .= '<p>';
+				$html .= sprintf( __( 'You have deleted the Add Post Type Instructions plugin. All settings associated with the plugin have been removed from the database.', $plugin->get_plugin_slug() ), admin_url( 'options-general.php?page=' . $plugin->get_plugin_slug() ) );
+			$html .= '</p>';
+			$html .= '</div><!-- /.updated -->';
+
+			echo $html;
+
+			delete_option( 'apti-display-uninstallation-message' );
+
+		}
+	}
+
+	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    1.0
+	 * @since    2.0
 	 */
 	public function load_plugin_textdomain() {
 
 		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
-		load_textdomain( $domain, trailingslashit( WP_PLUGIN_DIR ) . 'set-helper-content/languages/' . $locale . '.mo' );
+		load_textdomain( $domain, trailingslashit( WP_PLUGIN_DIR ) . 'languages/' . $locale . '.mo' );
 
 	}
 
