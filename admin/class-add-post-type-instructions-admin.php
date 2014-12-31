@@ -79,19 +79,23 @@ class Add_Post_Type_Instructions_Admin {
 
 		// Fire functions
 			add_action( 'admin_print_styles', array( $this, 'is_edit_page' ) );
-			add_action( 'edit_form_after_title', array( $this, 'add_content_above' ) );
+			add_action( 'edit_form_top', array( $this, 'add_content_above_title' ) );
+			add_action( 'edit_form_after_title', array( $this, 'add_content_above_editor' ) );
 			add_filter( 'default_content', array( $this, 'change_editor_content' ) );
+			add_action( 'admin_head', array( $this, 'change_publish_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_author_metabox_content' ) );
 			add_filter( 'admin_post_thumbnail_html', array( $this, 'change_thumbnail_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_excerpt_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_trackbacks_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_customfields_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_comments_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_discussion_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_revisions_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_pageattributes_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
 			add_action( 'admin_head', array( $this, 'change_postformats_metabox_content' ) );
-			// add_action( 'admin_head', array( $this, 'change_categories_metabox_content' ) );
-			// add_action( 'admin_head', array( $this, 'change_tags_metabox_content' ) );
+			add_action( 'admin_head', array( $this, 'change_slug_metabox_content' ) );
 
 	}
 
@@ -165,8 +169,6 @@ class Add_Post_Type_Instructions_Admin {
 	/**
 	 * Get post type
 	 *
-	 * @return string Post type
-	 *
 	 * @since 1.0
 	 */
 	public function get_post_type() {
@@ -187,8 +189,6 @@ class Add_Post_Type_Instructions_Admin {
 	/**
 	 * enqueue styles
 	 *
-	 * @param  string $content HTML string
-	 *
 	 * @since 1.0.2
 	 */
 	public function is_edit_page($new_edit = null){
@@ -203,21 +203,38 @@ class Add_Post_Type_Instructions_Admin {
 	} // end is_edit_page
 
 	/**
-	 * Add instruction text above the content editor
+	 * Add content above title
 	 *
-	 * @param  string $content HTML string
+	 * @since 2.1
+	 */
+	public function add_content_above_title() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['top_check'] ) && ! empty( $options['top_check'] ) ) {
+			if ( isset( $options['top'] ) && ! empty( $options['top'] ) ) { 
+				$top = $options['top'];
+				echo '<div id="apti-above-title">' . $top . '</div>';
+			}
+		}
+
+	} // end add_content_above_title
+
+	/**
+	 * Add instruction text above the content editor
 	 *
 	 * @since 1.0
 	 */
-	public function add_content_above() {
+	public function add_content_above_editor() {
 
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
 		if ( isset( $options['instruction_check'] ) && ! empty( $options['instruction_check'] ) ) {
 			if ( isset( $options['instruction'] ) && ! empty( $options['instruction'] ) ) {
-				$template = $options['instruction'];
-				echo '<br /><div id="apti-below-title">' . $template . '</div>';
+				$instruction = $options['instruction'];
+				echo '<br /><div id="apti-below-title">' . $instruction . '</div>';
 			}
 		}
 
@@ -225,9 +242,6 @@ class Add_Post_Type_Instructions_Admin {
 
 	/**
 	 * Set the default value fot the content editor
-	 *
-	 * @param  string $content HTML string
-	 * @return null
 	 *
 	 * @since 1.0
 	 */
@@ -252,9 +266,34 @@ class Add_Post_Type_Instructions_Admin {
 	} // end change_editor_content
 
 	/**
-	 * Change author metabox content
+	 * Change publish metabox content
 	 *
-	 * @param  string $content HTML string
+	 * @since 2.1
+	 */
+	public function change_publish_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['publish_check'] ) && ! empty( $options['publish_check'] ) ) {
+			if ( isset( $options['publish'] ) && ! empty( $options['publish'] ) ) { 
+				$publish = '<p class="apti-text apti-publish">' . $options['publish'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $publish; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('#submitdiv .inside #minor-publishing-actions')
+					});
+				</script>
+			<?php 
+			}
+		}
+
+	} // end change_publish_metabox_content
+
+	/**
+	 * Change author metabox content
 	 *
 	 * @since 1.0.1
 	 */
@@ -283,9 +322,6 @@ class Add_Post_Type_Instructions_Admin {
 	/**
 	 * Change thumbnail metabox content
 	 *
-	 * @param  string $content HTML string
-	 * @return string Modified content
-	 *
 	 * @since 1.0
 	 */
 	public function change_thumbnail_metabox_content( $content ) {
@@ -306,8 +342,6 @@ class Add_Post_Type_Instructions_Admin {
 
 	/**
 	 * Change excerpt metabox content
-	 *
-	 * @param  string $content HTML string
 	 *
 	 * @since 1.0.2
 	 */
@@ -336,8 +370,6 @@ class Add_Post_Type_Instructions_Admin {
 	/**
 	 * Change trackbacks metabox content
 	 *
-	 * @param  string $content HTML string
-	 *
 	 * @since 1.0.2
 	 */
 	public function change_trackbacks_metabox_content() {
@@ -364,8 +396,6 @@ class Add_Post_Type_Instructions_Admin {
 
 	/**
 	 * Change customfields metabox content
-	 *
-	 * @param  string $content HTML string
 	 *
 	 * @since 1.0.1
 	 */
@@ -394,8 +424,6 @@ class Add_Post_Type_Instructions_Admin {
 	/**
 	 * Change comments metabox content
 	 *
-	 * @param  string $content HTML string
-	 *
 	 * @since 2.0
 	 */
 	public function change_comments_metabox_content() {
@@ -421,9 +449,34 @@ class Add_Post_Type_Instructions_Admin {
 	} // end change_comments_metabox_content	
 
 	/**
-	 * Change revisions metabox content
+	 * Change discussion metabox content
 	 *
-	 * @param  string $content HTML string
+	 * @since 2.1
+	 */
+	public function change_discussion_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['discussion_check'] ) && ! empty( $options['discussion_check'] ) ) {
+			if ( isset( $options['discussion'] ) && ! empty( $options['discussion'] ) ) { 
+				$discussion = '<p class="apti-text apti-discussion">' . $options['discussion'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $discussion; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('#commentstatusdiv .inside p:nth-of-type(1)')
+					});
+				</script>
+			<?php 
+			}
+		}
+
+	} // end change_discussion_metabox_content	
+
+	/**
+	 * Change revisions metabox content
 	 *
 	 * @since 2.0
 	 */
@@ -452,8 +505,6 @@ class Add_Post_Type_Instructions_Admin {
 	/**
 	 * Change pageattributes metabox content
 	 *
-	 * @param  string $content HTML string
-	 *
 	 * @since 1.0.1
 	 */
 	public function change_pageattributes_metabox_content() {
@@ -472,16 +523,68 @@ class Add_Post_Type_Instructions_Admin {
 					    $('' + text_to_insert + '').insertBefore('#pageparentdiv .inside p:nth-of-type(1)')
 					});
 				</script>
-			<?php 
+				<?php 
 			}
 		}
 
 	} // end change_pageattributes_metabox_content
 
 	/**
-	 * Change postformats metabox content
+	 * Change categories metabox content
 	 *
-	 * @param  string $content HTML string
+	 * @since 2.1
+	 */
+	public function change_categories_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['categories_check'] ) && ! empty( $options['categories_check'] ) ) {
+			if ( isset( $options['categories'] ) && ! empty( $options['categories'] ) ) { 
+				$categories = '<p class="apti-text apti-categories">' . $options['categories'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $categories; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('#taxonomy-category')
+					});
+				</script>
+				<?php 
+			}
+		}
+
+	} // end change_categories_metabox_content	
+
+	/**
+	 * Change tags metabox content
+	 *
+	 * @since 2.1
+	 */
+	public function change_tags_metabox_content() {
+
+		$post_type = $this->get_post_type();
+		$options = get_option( $this->plugin_slug . '_' . $post_type );
+
+		if ( isset( $options['tags_check'] ) && ! empty( $options['tags_check'] ) ) {
+			if ( isset( $options['tags'] ) && ! empty( $options['tags'] ) ) { 
+				$tags = '<p class="apti-text apti-tags">' . $options['tags'] . '</p>'; ?>
+
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $tags; ?>';
+
+					    $('' + text_to_insert + '').insertBefore('.tagsdiv')
+					});
+				</script>
+				<?php 
+			}
+		}
+
+	} // end change_categories_metabox_content	
+
+	/**
+	 * Change postformats metabox content
 	 *
 	 * @since 1.0.1
 	 */
@@ -508,57 +611,30 @@ class Add_Post_Type_Instructions_Admin {
 	} // end change_postformats_metabox_content
 
 	/**
-	 * Change categories metabox content
+	 * Change slug metabox content
 	 *
-	 * @param  string $content HTML string
-	 *
-	 * @since 1.0.3
+	 * @since 2.1
 	 */
-/*	public function change_categories_metabox_content() {
+	public function change_slug_metabox_content() {
 
 		$post_type = $this->get_post_type();
 		$options = get_option( $this->plugin_slug . '_' . $post_type );
 
-		if ( isset( $options['categories'] ) && ! empty( $options['categories'] ) ) { 
-			$categories = '<p class="apti-text apti-categories">' . $options['categories'] . '</p>'; ?>
+		if ( isset( $options['slug_check'] ) && ! empty( $options['slug_check'] ) ) {
+			if ( isset( $options['slug'] ) && ! empty( $options['slug'] ) ) { 
+				$slug = '<p class="apti-text apti-slug">' . $options['slug'] . '</p>'; ?>
 
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $categories; ?>';
+				<script type="text/javascript">
+					jQuery(function($) {
+					    var text_to_insert = '<?php echo $slug; ?>';
 
-				    $('' + text_to_insert + '').insertBefore('#taxonomy-category')
-				});
-			</script>
-		<?php 
+					    $('' + text_to_insert + '').insertBefore('#slugdiv .inside label')
+					});
+				</script>
+			<?php 
+			}
 		}
 
-	} // end change_categories_metabox_content	*/
-
-	/**
-	 * Change tags metabox content
-	 *
-	 * @param  string $content HTML string
-	 *
-	 * @since 1.0.3
-	 */
-/*	public function change_tags_metabox_content() {
-
-		$post_type = $this->get_post_type();
-		$options = get_option( $this->plugin_slug . '_' . $post_type );
-
-		if ( isset( $options['tags'] ) && ! empty( $options['tags'] ) ) { 
-			$tags = '<p class="apti-text apti-tags">' . $options['tags'] . '</p>'; ?>
-
-			<script type="text/javascript">
-				jQuery(function($) {
-				    var text_to_insert = '<?php echo $tags; ?>';
-
-				    $('' + text_to_insert + '').insertBefore('.tagsdiv')
-				});
-			</script>
-		<?php 
-		}
-
-	} // end change_categories_metabox_content	*/
+	} // end change_slug_metabox_content	
 
 }

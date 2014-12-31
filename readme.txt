@@ -2,9 +2,9 @@
 Contributors: dauidus
 Author URI: http://dauid.us
 Tags: instructions, instruction, directions, assistive, post types, help, wysiwyg, client, text, editor, settings
-Requires at least: 3.1
+Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,20 +12,28 @@ Allows admins to easily set instructional context for metaboxes and more on page
 
 == Description ==
 
-Add Post Type Instructions allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.  Currently it supports adding instructional text in the following areas on the add/edit screen:
+Add Post Type Instructions allows admins to easily set instructional context for metaboxes and more on pages, posts or custom post types.  Currently it supports adding instructional context in the following areas on the add/edit screen:
 ** **
-* below the title field
-* author metabox
-* featured image metabox
-* excerpt metabox
-* trackbacks metabox
-* custom fields metabox
-* page attributes metabox
-* post format metabox
-* comments metabox
-* revisions metabox
+* above the title field
+* above the WYSIWYG editor
+* default content within the WYSIWYG editor
 
-APTI also allows admins to set default content within the WYSIWYG editor, per post type.
+and within the following metaboxes:
+** **
+* publish
+* author
+* featured image
+* excerpt
+* trackbacks
+* custom fields
+* page attributes
+* categories
+* tags
+* post format
+* discussion
+* comments
+* revisions
+* slug
 
 APTI uses OOP standards to add options only for those metaboxes which are supported for each post type and to execute code only on those pages where it is needed.  It works especially well for sites with many custom post types that require content to be entered in a specific way (ie. when a post type requires a specific page template or when the absence of a featured image will break the intended look of a post).  Think of any theme or plugin that supports an image slider powered by a required featured image, and you can surely see where APTI can come in handy.
 
@@ -86,6 +94,14 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 2. Non-intrusive instructive text can be easily added to multiple locations for any post type.
 
 == Changelog ==
+
+= 2.1 =
+* support for content above title field
+* support for categories, tags, discussion, slug and publish metaboxes
+* more intuitive colors on add/edit screen (from yellow to blue)
+* more appropriate spacing/font sizes on add/edit screen
+* every settings field now resizes
+* renamed "above title field" option to "above WYSIWYG editor"
 
 = 2.0 =
 * major changes to settings logic
