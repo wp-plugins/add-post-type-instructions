@@ -42,9 +42,7 @@ To be clear, APTI does absolutely nothing to the front-end of your site.  It sim
 APTI works with multisite networks and allows users to define settings on a per-site basis.
 
 = Coming soon =
-* add support for categories and tags
-* Help tab on settings page about unsupport features and how to support them
-* Translations
+* Translations - to submit a translation, please contact the author
 
 APTI will work with drag-n-drop builders such as Visual Composer, but the author cannot recommend its use with them.  This will be addressed in a future release.
 
