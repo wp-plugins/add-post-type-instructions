@@ -94,6 +94,7 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 == Changelog ==
 
 = 2.1 =
+* initial production release
 * support for content above title field
 * support for categories, tags, discussion, slug and publish metaboxes
 * more intuitive colors on add/edit screen (from yellow to blue)
@@ -138,6 +139,9 @@ Simply delete this plugin to remove all data associated with it.  Deactivating t
 * initial development release
 
 == Upgrade Notice ==
+
+= 2.1 =
+This update adds many new features, and is backward-compatible with version 2.0.  Users are urged to update for a better overall user experience.  This is the first production release of this plugin.
 
 = 2.0 =
 This is a major update. Visit plugin settings page after updating to ensure all settings are updated. Users now need to enable each setting via checkbox. Input fields on settings page will be populated with previously entered values.
