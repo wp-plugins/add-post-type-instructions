@@ -1,0 +1,85 @@
+
+.settings_page_apti p.description {
+	margin-bottom: 10px;
+}
+
+.settings_page_apti .form-table tr th,
+.settings_page_apti .form-table tr td {
+	padding-bottom: 0px !important;
+}
+
+.settings_page_apti .form-table tr:nth-of-type(2n+0) th,
+.settings_page_apti .form-table tr:nth-of-type(2n+0) td {
+	padding-top: 0px !important;
+}
+.settings_page_apti .form-table tr:nth-of-type(odd) th,
+.settings_page_apti .form-table tr:nth-of-type(odd) td {
+	padding-top: 30px !important;
+}
+
+.settings_page_apti label {
+	color: #B2B2B2;
+}
+
+.settings_page_apti input[type=checkbox]:checked + label {
+	color: #444;
+}
+
+/* Show/Hide textareas based on checkbox values */
+
+.settings_page_apti textarea {
+	width: 100%; 
+	padding: 10px; 
+	margin:8px 0px 0px;
+}
+.settings_page_apti .wp-editor-wrap {
+	margin: 8px 0 8px 0;
+}
+
+.settings_page_apti #top,
+.settings_page_apti #slug,
+.settings_page_apti #instruction,
+.settings_page_apti #publish,
+.settings_page_apti #author,
+.settings_page_apti #thumbnail,
+.settings_page_apti #excerpt,
+.settings_page_apti #trackbacks,
+.settings_page_apti #customfields,
+.settings_page_apti #comments,
+.settings_page_apti #discussion,
+.settings_page_apti #revisions,
+.settings_page_apti #pageattributes,
+.settings_page_apti #categories,
+.settings_page_apti #tags,
+.settings_page_apti #postformats {
+    padding: 10px; 
+    margin:0px 0px 15px;
+    position:relative;
+    height:auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.settings_page_apti textarea#top_input,
+.settings_page_apti textarea#slug_input,
+.settings_page_apti textarea#instruction_input,
+.settings_page_apti textarea#publish_input,
+.settings_page_apti textarea#author_input,
+.settings_page_apti textarea#thumbnail_input,
+.settings_page_apti textarea#excerpt_input,
+.settings_page_apti textarea#trackbacks_input,
+.settings_page_apti textarea#customfields_input,
+.settings_page_apti textarea#comments_input,
+.settings_page_apti textarea#discussion_input,
+.settings_page_apti textarea#revisions_input,
+.settings_page_apti textarea#pageattributes_input,
+.settings_page_apti textarea#categories_input,
+.settings_page_apti textarea#tags_input,
+.settings_page_apti textarea#postformats_input {
+	resize:none;
+    overflow:hidden;
+    height:100%;
+	position:absolute;
+    top:0;
+    left:0;
+}
+
